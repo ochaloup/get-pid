@@ -18,8 +18,8 @@ public class ProcessStarter {
     // running the ProcessBuilder has some pitfalls
     // but for simple usecase this seems to be fine
     ProcessBuilder builder = new ProcessBuilder(commandToRun);
-    // joining std out and std err to one output
-    builder.redirectErrorStream(true);
+    // joining std out and std err to one output - this seems not being supported on windows
+    // builder.redirectErrorStream(true);
     
     Process process;
     try {
@@ -31,7 +31,8 @@ public class ProcessStarter {
     }
     
     // input stream means that it will read from command output
-    readProcessOutput(process.getInputStream());
+    readProcessOutput("stdout", process.getInputStream());
+    readProcessOutput("stderr", process.getErrorStream());
     
     return process;
   }
@@ -44,7 +45,7 @@ public class ProcessStarter {
    * @param inputStream  stream to read
    * @return created started thread
    */
-  private Thread readProcessOutput(final InputStream inputStream) {
+  private Thread readProcessOutput(final String logPrefix, final InputStream inputStream) {
       Thread thread = new Thread(new Runnable() {
           public void run() { 
               InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -55,8 +56,10 @@ public class ProcessStarter {
               try {
                   while ((line = br.readLine()) != null) {
                     lineNumber++;
-                    log.info("[" + inputStream + "]" + lineNumber + ": " + line);
+                    log.fine("[" + inputStream + "]");
+                    log.info(logPrefix + ":[" + lineNumber + "]:" + line);
                   }
+                  log.info(br + " ended");
               } catch(IOException ioe) {
                   // just log and go. Let user do something. 
                   log.severe("Not able to read from the buffered reader " + br + " Exception: " + ioe);

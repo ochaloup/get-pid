@@ -20,11 +20,11 @@ public class Main {
     if (Platform.isUnixLike()) {
       String[] command = new String[] {"/bin/sh", "-c", "while(true); do echo \"Sleeping...\"; sleep 10; done"};
       process = starter.start(command);
-      System.out.println("Pid of the underlined process is: " + GetPid.getUnixPid(process));
+      System.out.println("Pid of the underlined process is: " + GetPid.getUnixPid(process) + "\n");
     } else {
       String[] command = new String[] {"cmd", "/C", "for %I in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21) DO echo Sleeping... & timeout /T 10"};
       process = starter.start(command);
-      System.out.println("Pid of the underlined process is: " + GetPid.getWindowsPid(process));
+      System.out.println("Pid of the underlined process is: " + GetPid.getWindowsPid(process) + "\n");
     }
 
     System.out.println("Waiting for character 'q' to end the program");
