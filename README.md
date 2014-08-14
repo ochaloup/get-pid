@@ -6,5 +6,5 @@ How to run
 ----------
 ```
 mvn package
-java -cp target/get-pid-1.0-SNAPSHOT.jar cz.chalda.pid.Main
+java -cp target/get-pid-1.0-SNAPSHOT-jar-with-dependencies.jar cz.chalda.pid.Main
 ```
