@@ -18,10 +18,12 @@ public class Main {
     Process process;
     
     if (Platform.isUnixLike()) {
+      System.out.println("Starting unix like command");
       String[] command = new String[] {"/bin/sh", "-c", "while(true); do echo \"Sleeping...\"; sleep 10; done"};
       process = starter.start(command);
       System.out.println("Pid of the underlined process is: " + GetPid.getUnixPid(process) + "\n");
     } else {
+      System.out.println("Starting windows command");
       String[] command = new String[] {"cmd", "/C", "for %I in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21) DO echo Sleeping... & ping 1.1.1.1 -n 1 -w 10000 > nul"};
       process = starter.start(command);
       System.out.println("Pid of the underlined process is: " + GetPid.getWindowsPid(process) + "\n");

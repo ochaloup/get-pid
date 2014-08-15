@@ -41,6 +41,10 @@ public class Platform {
       return osName.equals("HP-UX");
   }
 
+  public static boolean isAIX() {
+    return osName.equals("AIX");
+  }
+
   public static boolean isX64() {
       return osArch.equals("amd64");
   }
@@ -62,7 +66,7 @@ public class Platform {
   }
 
   public static boolean isUnixLike() {
-    return (isSolaris() || isHP() || isLinux());
+    return (isSolaris() || isHP() || isAIX() || isLinux());
  }
   
   /**
