@@ -2,7 +2,7 @@ Testing project to get PID from started java Process
 -----------------------------------------------------
 This is based on web article <a href="http://www.golesny.de/p/code/javagetpid">http://www.golesny.de/p/code/javagetpid</a>
 
-TEST2
+TEST23
 
 How to run
 ----------
